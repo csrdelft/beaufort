@@ -4,15 +4,15 @@ $(function () {
 
     //===== Prealoder
 
-    $(window).on('load', function (event) {
+    $(window).on('load', function () {
         $('.preloader').delay(500).fadeOut(500);
     });
 
 
     //===== Sticky
 
-    $(window).on('scroll', function (event) {
-        var scroll = $(window).scrollTop();
+    $(window).on('scroll', function () {
+        let scroll = $(window).scrollTop();
         if (scroll < 10) {
             $(".navbar-area").removeClass("sticky");
         } else {
@@ -130,7 +130,7 @@ $(function () {
     //===== Back to top
 
     // Show or hide the sticky footer button
-    $(window).on('scroll', function (event) {
+    $(window).on('scroll', function () {
         if ($(this).scrollTop() > 600) {
             $('.back-to-top').fadeIn(200)
         } else {
