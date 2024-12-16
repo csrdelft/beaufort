@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import banner from '../assets/banner.jpg';
+import admiraal from '../assets/admiraal.jpg';
+import marconist from '../assets/marconist.jpg';
+import thesaurier from '../assets/thesaurier.jpg';
+import schoutBijNacht from '../assets/schout-bij-nacht.jpg';
+import LogoTransparant from '../components/LogoTransparant.astro';
+
+import photoGrid1 from '../assets/photogrid-1.jpg';
+import photoGrid2 from '../assets/photogrid-2.jpg';
+import photoGrid3 from '../assets/photogrid-3.jpg';
+import photoGrid4 from '../assets/photogrid-4.jpg';
+import photoGrid5 from '../assets/photogrid-5.jpg';
+
+
+// TODO: Configuratiebestandje
+const ADMIRALITEIT = [
+  {
+    naam: 'Am. Medendorp',
+    titel: 'Admiraal',
+    image: admiraal
+  },
+  {
+    naam: 'Am. van Delden',
+    titel: 'Marconist',
+    image: marconist
+  },
+  {
+    naam: 'Am. Nijenhuis',
+    titel: 'Thesauriër',
+    image: thesaurier
+  },
+  {
+    naam: 'Am. Horneman',
+    titel: 'Schout-bij-nacht',
+    image: schoutBijNacht
+  },
+]
+
+// TODO: Configuratiebestandje
+const JAARPLANNING = [
+  {
+    date: new Date("2024-12-16"),
+    title: "Dies Natalis",
+    description: "De verjaardag van Beaufort"
+  },
+  {
+    date: new Date("2025-4-9"),
+    title: "De rest",
+    description: "Lorem ipsum ofzo"
+  },
+  {
+    date: new Date("2025-4-9"),
+    title: "Wist ik",
+    description: "Lorem ipsum ofzo"
+  },
+  {
+    date: new Date("2025-4-9"),
+    title: "Nog niet!",
+    description: "Lorem ipsum ofzo"
+  },
+]
+const MAANDEN = ["JAN", "FEB", "MRT", "APR", "MEI", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"];
+const DAGEN = ["ZO", "MA", "DI", "WO", "DO", "VR", "ZA"];
+---
+
+<Layout>
+  <div class="w-full h-fit grid grid-cols-1">
+    <Image src={banner} alt="" class="aspect-[10/16] md:aspect-square lg:aspect-video object-cover row-span-full col-span-full" />
+    <LogoTransparant class="aspect-[10/16] md:aspect-square lg:aspect-video w-full row-span-full col-span-full" />
+  </div>
+  <nav class="sticky top-0 bg-white shadow flex h-20 items-center justify-between lg:px-8" aria-label="Global">
+    <div class="hidden mx-auto md:flex md:gap-x-12">
+      <a href="#over-beaufort" class="text-2xl font-semibold text-gray-900">Over</a>
+      <a href="#admiraliteit" class="text-2xl font-semibold text-gray-900">Admiraliteit</a>
+      <a href="#jaarplanning" class="text-2xl font-semibold text-gray-900">Jaarplanning</a>
+      <a href="#lid-worden" class="text-2xl font-semibold text-gray-900">Lid worden?</a>
+    </div>
+  </nav>
+  <main class="mx-auto p-8 container max-w-screen-lg">
+    <h1 id="over-beaufort" class="text-6xl font-display my-8">Over Beaufort</h1>
+    <p class="text-2xl">
+      Voor zeilen, gezelligheid en avonturen op het water, is Beaufort de
+      ondervereniging. Een zeiljaar bestaat voor Beaufort uit de verschillende
+      elementen: een VoorJaarsWeekend (luxe kajuitbootjes, IJsselmeer), een
+      ZomerZeilZwerfWeek (valkjes, een week lang zwerven door Friesland), een
+      NaJaarsWeekend (valkjes, nachtzeilen, ijs op het dek) en een Dies (feest,
+      vriendschappen, diner). Daarnaast willen wij door middel van instructies
+      iedereen in staat stellen goed te leren zeilen en wordt het jaarschema
+      aangevuld met ZeilZaterdagen en andere uitjes. Beaufort biedt door al
+      haar gezelligheid en verhalen echte vriendschappen voor het leven,
+      dikwijls met een gelofte bevestigd. Verder is ieder C.S.R. lid welkom om
+      mee te gaan op de ZomerZeilZwerfWeek. Vragen? stuur ons gerust een
+      mailtje naar <a href="mailto:beaufort.csr@gmail.com" class="text-blue-500 underline">Beaufort.csr@gmail.com</a>!
+    </p>
+    <h1 id="admiraliteit" class="text-6xl font-display my-8">Admiraliteit</h1>
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-wrap">
+      {ADMIRALITEIT.map(lid => <div class="shadow-xl pb-2 rounded-xl basis-0 flex-1 min-w-48">
+        <Image class="rounded-xl" src={lid.image} alt="" />
+        <h2 class="text-center text-xl my-2">{lid.naam}</h2>
+        <h3 class="text-center font-bold my-2">{lid.titel}</h3>
+      </div>)}
+    </section>
+
+    <h1 id="jaarplanning" class="text-6xl font-display my-8">Jaarplanning</h1>
+    <table>
+      {JAARPLANNING.map(item => <>
+        <tr>
+          <td class="font-bold text-center pr-8 text-gray-800">{DAGEN[item.date.getDay()]}</td>
+          <td rowspan="3" class="pl-8 border-l-2 text-gray-800">
+            <h1 class="text-5xl text-[#39639f] font-display">{item.title}</h1>
+            {item.description}
+          </td>
+        </tr>
+        <tr>
+        <td class="font-bold text-4xl text-right pr-8">{item.date.getDate()}</td>
+        </tr>
+        <tr>
+          <td class="pb-4 font-bold text-center pr-8 text-gray-800">{MAANDEN[item.date.getMonth()]}</td>
+        </tr>
+      </>)}
+    </table>
+    <h1 id="lid-worden" class="text-6xl font-display my-8">Lid Worden?</h1>
+    <p class="text-2xl">Dat kan! Voor slechts <div class="mx-auto w-fit py-4 font-bold text-3xl"><span class="text-6xl font-semibold text-green-600"> €17,50 </span>Per jaar!</div>
+    </p>
+    <p class="text-2xl">
+      Neem dan als de wiederweerga contact op met Am. Marconist. Dit kan via flessenpost of duif. Mocht dat niet lukken, stuur dan een mailtje naar
+      <a href="mailto:beaufort.csr@gmail.com" class="text-blue-500 underline">Beaufort.csr@gmail.com</a>!
+    </p>
+    <p class="">
+    </p>
+  </main>
+    <section class="grid grid-cols-2 grid-rows-4 gap-4 h-fit container mx-auto xl:grid-cols-4 aspect-[1/3] xl:aspect-[2/3] py-4">
+      <Image src={photoGrid1} alt="" class="shadow-xl rounded-xl object-cover h-full w-full row-span-1 col-span-2 xl:row-span-2 xl:col-span-3 xl:object-left"  />
+      <Image src={photoGrid2} alt="" class="shadow-xl rounded-xl object-cover h-full w-full row-span-2 col-span-1 xl:col-start-4 xl:row-start-1"  />
+      <Image src={photoGrid3} alt="" class="shadow-xl rounded-xl object-cover h-full w-full row-span-1 col-span-1 xl:row-start-3 xl:col-start-3 xl:col-span-2" />
+      <Image src={photoGrid4} alt="" class="shadow-xl rounded-xl object-cover h-full w-full row-span-2 col-span-1 xl:col-span-2 xl:col-start-1 xl:row-start-3" />
+      <Image src={photoGrid5} alt="" class="shadow-xl rounded-xl object-cover h-full w-full row-span-1 col-span-1 xl:row-start-4 xl:col-start-3 xl:col-span-2" />
+    </section>
+</Layout>
